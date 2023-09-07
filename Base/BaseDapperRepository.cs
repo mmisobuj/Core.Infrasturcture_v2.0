@@ -115,12 +115,11 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
-            return null;
+        
         }
         public async Task<T> QuerySingle<T>(string query, object? parameters = null)
         {
@@ -130,13 +129,12 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
 
             }
-            return default;
+       
         }
         public async Task<T> QuerySingleOrDefaultAsync<T>(string query, object? parameters = null)
         {
@@ -146,13 +144,12 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
 
             }
-            return default;
+         
         }
 
         public async Task<T> QueryFirstOrDefaultAsync<T>(string query, object? parameters = null)
@@ -163,9 +160,8 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
             return default;
@@ -178,12 +174,11 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
-            return null;
+          
         }
 
         public async Task<T> SpQuerySingle<T>(string query, object? parameters = null)
@@ -194,12 +189,10 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
-            return default;
 
         }
         public async Task<int> SpQueryScalar(string query, object? parameters = null)
@@ -210,9 +203,8 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
 
@@ -227,12 +219,11 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
-            return default;
+      
 
         }
         public async Task<int> ExecuteSpAsync(string query, object? parameters = null)
@@ -252,21 +243,11 @@ namespace Core.Infrastructure.Base
             catch (Exception ex)
             {
 
-
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
-                //result.IsSuccessStatus = false;
-                //result.Message = ex.Message;
-                //result.StatusCode = 500;
-                throw ex;
+                throw;
             }
-            finally
-            {
-                //if (_tran == null)
-                //{
-                //    _conn.Close();
-                //}
-            }
-            return -1;
+            
+             
         }
         public async Task<int> ExecuteAsync(string query, object? parameters = null)
         {
@@ -285,19 +266,13 @@ namespace Core.Infrastructure.Base
                     return await _conn.ExecuteAsync(query, parameters, commandTimeout: commandTimeOut);
 
                 }
-
-                //result.EffectedRow = count;
-                //result.IsSuccessStatus = true;
-                //result.StatusCode = 200;
+               
             }
             catch (Exception ex)
             {
 
-                _logger.LogError(ex.Message + " InnerException: ", ex.InnerException);
-                //result.IsSuccessStatus = false;
-                //result.Message = ex.Message;
-                //result.StatusCode = 500;
-                throw ex;
+                _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
             }
             finally
             {
@@ -306,7 +281,7 @@ namespace Core.Infrastructure.Base
                     _conn.Close();
                 }
             }
-            return -1;
+        
         }
 
         public async Task<int> ExecuteScalerAsync(string query, object? parameters = null)
@@ -332,20 +307,12 @@ namespace Core.Infrastructure.Base
                         int.TryParse(obj.ToString(), out result);
                     }
                 }
-
-
-
-                //result.EffectedRow = count;
-                //result.IsSuccessStatus = true;
-                //result.StatusCode = 200;
+                  
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message + " InnerException: ", ex.InnerException);
-                //result.IsSuccessStatus = false;
-                //result.Message = ex.Message;
-                //result.StatusCode = 500;
-                throw ex;
+                _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
             finally
@@ -416,27 +383,18 @@ namespace Core.Infrastructure.Base
                     }
                 }
 
-
-                //result.EffectedRow = count;
-                //result.IsSuccessStatus = true;
-                //result.StatusCode = 200;
+               
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex.Message + " InnerException: ", ex.InnerException);
-                //result.IsSuccessStatus = false;
-                //result.Message = ex.Message;
-                //result.StatusCode = 500;
-                throw ex;
+                _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
             finally
             {
-                //if (_tran == null)
-                //{
-                //    _conn.Close();
-                //}
+                
             }
             return result;
         }
@@ -457,12 +415,11 @@ namespace Core.Infrastructure.Base
             }
             catch (Exception ex)
             {
-                if (_logger == null)
-                    throw ex;
                 _logger?.LogError(ex.Message + " InnerException: ", ex.InnerException);
+                throw;
 
             }
-            return null;
+         
         }
 
         public async Task<GridEntity<T2>> GridDataSourceAync<T2>(string query, string orderByColumn, GridOptions? options = null, string condition = "")
