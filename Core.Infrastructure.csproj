@@ -13,6 +13,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\ExpressionExtension.cs" />
+    <Compile Remove="Extensions\FilteringExtension.cs" />
+    <Compile Remove="Extensions\GroupingExtension.cs" />
+    <Compile Remove="Extensions\SessionExtension.cs" />
+    <Compile Remove="Extensions\SortingExtension.cs" />
+    <Compile Remove="Grid\GridOptionsV2.cs" />
+    <Compile Remove="MapperProfile\GridOptionProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
     <PackageReference Include="MediatR" Version="12.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
@@ -22,6 +32,10 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
     <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     <PackageReference Include="System.Linq.Dynamic.Core" Version="1.3.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MapperProfile\" />
   </ItemGroup>
 
 </Project>
