@@ -27,11 +27,11 @@ namespace Core.Infrastructure.Paging
         /// <summary>
         /// Specifies the requested grouping .
         /// </summary>
-        public IEnumerable<Group> Group { get; set; }
+        //public IEnumerable<Group> Group { get; set; }
 
-        /// <summary>
-        /// Specifies the requested aggregators.
-        /// </summary>
-        public IEnumerable<Aggregator> Aggregate { get; set; }
+        ///// <summary>
+        ///// Specifies the requested aggregators.
+        ///// </summary>
+        //public IEnumerable<Aggregator> Aggregate { get; set; }
     }
 }

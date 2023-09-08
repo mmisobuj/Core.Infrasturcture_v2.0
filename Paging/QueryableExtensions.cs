@@ -109,7 +109,7 @@ namespace Core.Infrastructure.Paging
         /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
         public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, DataSourceRequest request)
         {
-            return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter, request.Aggregate, request.Group);
+            return queryable.ToDataSourceResult(request.Take, request.Skip, request.Sort, request.Filter);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Core.Infrastructure.Paging
         /// <param name="aggregates">Specifies the current aggregates.</param>
         /// <param name="group">Specifies the current groups.</param>
         /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
-        public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, List<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates, IEnumerable<Group> group)
+        public static DataSourceResult ToDataSourceResult<T>(this IQueryable<T> queryable, int take, int skip, List<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates, IEnumerable<GroupQuery> group)
         {
             var errors = new List<object>();
 
@@ -170,16 +170,16 @@ namespace Core.Infrastructure.Paging
                 Aggregates = aggregate
             };
 
-            // Group By
-            if (group?.Any() == true)
-            {
-                //result.Groups = queryable.ToList().GroupByMany(group);                
-                result.Groups = queryable.GroupByMany(group);
-            }
-            else
-            {
-                result.Items = queryable.ToList();
-            }
+            //// Group By
+            //if (group?.Any() == true)
+            //{
+            //    //result.Groups = queryable.ToList().GroupByMany(group);                
+            //    result.Groups = queryable.GroupByMany(group);
+            //}
+            //else
+            //{
+            //    result.Items = queryable.ToList();
+            //}
 
             // Set errors if any
             if (errors.Count > 0)
@@ -202,7 +202,7 @@ namespace Core.Infrastructure.Paging
         /// <param name="aggregates">Specifies the current aggregates.</param>
         /// <param name="group">Specifies the current groups.</param>
         /// <returns>A DataSourceResult object populated from the processed IQueryable.</returns>
-        public static Task<DataSourceResult> ToDataSourceResultAsync<T>(this IQueryable<T> queryable, int take, int skip, List<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates = null, IEnumerable<Group> group = null)
+        public static Task<DataSourceResult> ToDataSourceResultAsync<T>(this IQueryable<T> queryable, int take, int skip, List<Sort> sort, Filter filter, IEnumerable<Aggregator> aggregates = null, IEnumerable<GroupQuery> group = null)
         {
             return Task.Run(() => queryable.ToDataSourceResult(take, skip, sort, filter, aggregates, group));
         }

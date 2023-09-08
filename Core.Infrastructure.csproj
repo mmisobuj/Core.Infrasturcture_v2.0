@@ -7,19 +7,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Request\**" />
+    <Compile Remove="Models\Response\**" />
     <Compile Remove="Utilty\**" />
+    <EmbeddedResource Remove="Models\Request\**" />
+    <EmbeddedResource Remove="Models\Response\**" />
     <EmbeddedResource Remove="Utilty\**" />
+    <None Remove="Models\Request\**" />
+    <None Remove="Models\Response\**" />
     <None Remove="Utilty\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\AggregateExtension.cs" />
     <Compile Remove="Extensions\ExpressionExtension.cs" />
     <Compile Remove="Extensions\FilteringExtension.cs" />
     <Compile Remove="Extensions\GroupingExtension.cs" />
+    <Compile Remove="Extensions\PagingExtension.cs" />
     <Compile Remove="Extensions\SessionExtension.cs" />
     <Compile Remove="Extensions\SortingExtension.cs" />
     <Compile Remove="Grid\GridOptionsV2.cs" />
     <Compile Remove="MapperProfile\GridOptionProfile.cs" />
+    <Compile Remove="Paging\EnumerableExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>
