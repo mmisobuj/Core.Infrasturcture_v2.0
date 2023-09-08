@@ -1,5 +1,5 @@
 ﻿using Core.Infrastructure.Extensions;
-using Core.Infrastructure.Models.Request;
+using Core.Infrastructure.Paging;
 
 namespace Core.Infrastructure.Extensions
 {

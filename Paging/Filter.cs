@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Newtonsoft.Json;
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 
@@ -7,38 +8,35 @@ namespace Core.Infrastructure.Paging
     /// <summary>
     /// Represents a filter expression of Kendo DataSource.
     /// </summary>
-    [DataContract]
+    //[DataContract]
     public class Filter
     {
         /// <summary>
         /// Gets or sets the name of the sorted field (property). Set to null if the Filters property is set.
         /// </summary>
-        [DataMember(Name = "field")]
-        public string Field { get; set; }
 
-        /// <summary>
-        /// Gets or sets the filtering operator. Set to null if the Filters property is set.
-        /// </summary>
-        [DataMember(Name = "operator")]
-        public string Operator { get; set; }
+        [JsonProperty("logic")]
+        public string? Logic { get; set; }
 
-        /// <summary>
-        /// Gets or sets the filtering value. Set to null if the Filters property is set.
-        /// </summary>
-        [DataMember(Name = "value")]
-        public object Value { get; set; }
+        [JsonProperty("field")]
+        public string? Field { get; set; }
 
-        /// <summary>
-        /// Gets or sets the filtering logic. Can be set to "or" or "and". Set to null unless Filters is set.
-        /// </summary>
-        [DataMember(Name = "logic")]
-        public string Logic { get; set; }
+        [JsonProperty("operator")]
+        public string? Operator { get; set; }
 
-        /// <summary>
-        /// Gets or sets the child filter expressions. Set to null if there are no child expressions.
-        /// </summary>
-        [DataMember(Name = "filters")]
-        public List<Filter> Filters { get; set; }
+        [JsonProperty("value")]
+        public object? Value { get; set; }
+
+        [JsonProperty("filters")]
+        public List<Filter>? Filters { get; set; }
+
+        public bool IsDescriptor
+        {
+            get
+            {
+                return Field != null && Operator != null;
+            }
+        }
 
         /// <summary>
         /// Mapping of Kendo DataSource filtering operators to Dynamic Linq
@@ -328,6 +326,28 @@ namespace Core.Infrastructure.Paging
             //}
 
             return currentType;
+        }
+        public static string GetOperator(string key)
+        {
+            Dictionary<string, string> operators = new Dictionary<string, string>()
+            {
+                { "eq", "Equals" },
+                { "neq", "DoesNotEqual" },
+                { "doesnotcontain", "DoesNotContain" },
+                { "contains", "Contains" },
+                { "startswith", "StartsWith" },
+                { "endswith", "EndsWith" },
+                { "isnull", "IsNull" },
+                { "isnotnull", "IsNotNull" },
+                { "isempty", "IsEmpty" },
+                { "isnotempty", "IsNotEmpty" },
+                { "gt", "GreaterThan" },
+                { "gte", "GreaterThanOrEqual" },
+                { "lt", "LessThan" },
+                { "lte", "LessThanOrEqual" }
+            };
+
+            return operators[key];
         }
     }
 }

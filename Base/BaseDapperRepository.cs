@@ -2,6 +2,7 @@
 using Core.Infrastructure.Extensions;
 using Core.Infrastructure.Grid;
 using Core.Infrastructure.Models;
+using Core.Infrastructure.Paging;
 using Core.Infrastructure.Query;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
@@ -451,7 +452,8 @@ namespace Core.Infrastructure.Base
                 //return new GridEntity<T2> { Items = ProductListOne, TotalCount = ProductListTwo };
 
                 var data = await _conn.QueryAsync<T2>(spName, parameters, commandType: CommandType.StoredProcedure, commandTimeout: commandTimeOut);
-                return new GridEntity<T2> { Items = data.ToList(), TotalCount = data.Count() };
+                return data.ToPaging(options);
+                // return new GridEntity<T2> { Items = data.ToList(), TotalCount = data.Count() };
                 // return data.ToGridDataSource(options);
 
             }

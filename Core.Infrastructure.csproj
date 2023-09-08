@@ -20,11 +20,9 @@
 
   <ItemGroup>
     <Compile Remove="Extensions\AggregateExtension.cs" />
-    <Compile Remove="Extensions\ExpressionExtension.cs" />
     <Compile Remove="Extensions\FilteringExtension.cs" />
     <Compile Remove="Extensions\GroupingExtension.cs" />
     <Compile Remove="Extensions\PagingExtension.cs" />
-    <Compile Remove="Extensions\SessionExtension.cs" />
     <Compile Remove="Extensions\SortingExtension.cs" />
     <Compile Remove="Grid\GridOptionsV2.cs" />
     <Compile Remove="MapperProfile\GridOptionProfile.cs" />

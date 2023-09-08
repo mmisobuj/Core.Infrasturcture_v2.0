@@ -1,5 +1,5 @@
 ﻿using Core.Infrastructure.Extensions;
-using Core.Infrastructure.Models.Request;
+using Core.Infrastructure.Paging;
 
 namespace Core.Infrastructure.Extensions
 {
@@ -16,14 +16,14 @@ namespace Core.Infrastructure.Extensions
                 if (isFirst)
                 {
                     isFirst = false;
-                    methodName = sort.dir == "asc" ? "OrderBy" : "OrderByDescending";
+                    methodName = sort.Dir == "asc" ? "OrderBy" : "OrderByDescending";
                 } 
                 else
                 {
-                    methodName = sort.dir == "asc" ? "ThenBy" : "ThenByDescending";
+                    methodName = sort.Dir == "asc" ? "ThenBy" : "ThenByDescending";
                 }
 
-                data = data.ApplySort(methodName, sort.field);
+                data = data.ApplySort(methodName, sort.Field);
             }
 
             return data;

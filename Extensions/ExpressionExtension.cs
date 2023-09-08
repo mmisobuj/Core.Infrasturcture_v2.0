@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Core.Infrastructure.Paging;
+using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using Core.Infrastructure.Extensions;
-using Core.Infrastructure.Models.Request;
 
 namespace Core.Infrastructure.Extensions
 {
@@ -181,7 +180,7 @@ namespace Core.Infrastructure.Extensions
         private static Expression<Func<T, bool>> CreateOperatorExpression<T>(string op, string field, object value)
         {
             var paramExp = GetParameterExpression(typeof(T));
-            var parsedOperator = FilteringExtension.GetOperator(op);
+            var parsedOperator = Filter.GetOperator(op);
             var method = typeof(ExpressionExtension).GetMethod(parsedOperator, BindingFlags.NonPublic | BindingFlags.Static);
 
             var propInfo = CommonExtension.GetPropertyInfo(typeof(T), field);

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Core.Infrastructure.Paging;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,34 @@ namespace Core.Infrastructure.Grid
         //public int pageSize { get; set; }
         public List<KendoGridFilter.GridSort>? sort { get; set; }
         public KendoGridFilter.GridFilters? filter { get; set; }
+    }
+    public class PagingQuery
+    {
+        [JsonProperty("skip")]
+        public int Skip { get; set; }
+
+        [JsonProperty("take")]
+        public int Take { get; set; }
+
+        [JsonProperty("groupPaging")]
+        public bool GroupPaging { get; set; }
+
+        [JsonProperty("sort")]
+        public List<Sort>? Sorts { get; set; }
+
+        [JsonProperty("filter")]
+        public Filter? Filter { get; set; }
+
+        [JsonProperty("page")]
+
+        public int Page { get; set; }
+
+
+        //[JsonProperty("group")]
+        //public List<GroupRequest>? Groups { get; set; }
+
+        //[JsonProperty("aggregate")]
+        //public List<AggregateRequest>? Aggregates { get; set; }
     }
 
     public class AutoCompOptions
